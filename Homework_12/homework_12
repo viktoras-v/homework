@@ -1,0 +1,20 @@
+
+# docker-compose.yaml
+version: '3'
+
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 81:80
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+
+# Run docker-compose up

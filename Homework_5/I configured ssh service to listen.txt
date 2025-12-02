@@ -1,0 +1,34 @@
+I configured ssh service to listen on custom port 65535 and it failed.
+
+systemctl restart ssh
+Job for ssh.service failed because the control process exited with error code.
+See "systemctl status ssh.service" and "journalctl -xeu ssh.service" for details.
+
+Let`s search logs
+journalctl -xeu ssh.service
+Nov 04 20:03:52 DESKTOP-IU3QG8N sshd[3403]: /etc/ssh/sshd_config line 23: Badly formatted port number.
+
+Probably I have found an error.
+head -n 23 /etc/ssh/sshd_config | tail -n 1
+Port 65536
+Oh, port number out of range!
+Fixed port to correct 65535 in config
+
+Restart ssh:
+systemctl daemon-reload (config file tells to do it before restart)
+systemctl restart ssh
+
+Verify:
+systemctl status ssh
+● ssh.service - OpenBSD Secure Shell server
+     Loaded: loaded (/usr/lib/systemd/system/ssh.service; disabled; preset: enabled)
+     Active: active (running) since Tue 2025-11-04 20:14:34 EET; 39s ago
+
+netstat -tulpn | grep 65535
+tcp        0      0 0.0.0.0:65535           0.0.0.0:*               LISTEN      1/init
+
+Troubleshooting complete.
+
+
+
+

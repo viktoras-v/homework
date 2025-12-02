@@ -1,0 +1,5 @@
+FROM ubuntu:latest
+RUN apt update && apt install -y python3
+ENV MESSAGE=Hello
+COPY script.py /opt/script.py
+CMD ["python3", "/opt/script.py"]

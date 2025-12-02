@@ -1,0 +1,20 @@
+subject: &music_subject
+  - music
+
+studentas_1:
+  name: Antanas
+  age: 72
+  grade: 10
+  subjects: 
+    - *music_subject
+    - art
+    - phisical education
+
+studentas_2:
+  name: Petras
+  age: 78
+  grade: 9
+  subjects: 
+    - *music_subject
+    - art
+    - phisical education

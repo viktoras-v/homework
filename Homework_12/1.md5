@@ -1,0 +1,25 @@
+# Dockerfile
+FROM python:3.12-slim
+WORKDIR /app
+RUN pip install flask
+RUN pip install redis
+COPY ./app.py .
+CMD ["python", "app.py"]
+
+# Docker-compose
+services:
+  web:
+    build: .
+    container_name: app
+    ports:
+      - "5000:5000"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:alpine
+    container_name: db
+    restart: always

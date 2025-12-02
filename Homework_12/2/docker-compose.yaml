@@ -1,0 +1,24 @@
+
+
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+    networks: 
+      - my_net
+     
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports: 
+      - 81:80
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+    networks:
+      - my_net
+
+
+networks: 
+  my_net:

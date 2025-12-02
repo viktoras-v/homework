@@ -1,0 +1,21 @@
+1.
+INSTALLATION:
+apt update 
+apt install redis
+Yes
+
+CONFIGURATION:
+vi /etc/redis/redis.conf
+bind * -::*     - listen ALL interfaces
+port 6379       - default port
+maxmemory 256mb - my choice
+
+STARTUP and VERIFICATION:
+systemctl enable redis
+systemctl start redis
+systemc	status redis
+netstat -tulpn | grep 6379
+
+Should see:
+tcp        0      0 0.0.0.0:6379            0.0.0.0:*               LISTEN      2594/redis-server *
+tcp6       0      0 :::6379                 :::*                    LISTEN      2594/redis-server *

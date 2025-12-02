@@ -1,0 +1,52 @@
+1.
+https://docs.ansible.com/ansible/latest/index.html
+
+Structure:
+As expected from best practices, I see Getting Started, Installation, and Using Ansible sections in the left column.
+Each of these has a sub-menu, and after the Introduction we jump directly to creating playbooks. Nice — straight to hands-on!
+The left column gives convenient navigation.
+However, the most important part of Ansible — the modules — is not easy to find. It’s hidden in Reference & Appendices. Not nice at all!
+Let’s forgive this inconvenience, though, because the Search box at the top compensates for it.
+Let’s examine the Installation topic. You just scroll to your installation method and that’s it — copy/paste the command.
+Overall, a neutral evaluation of the menu.
+
+Best Practices:
+Every module provides examples of use, which are best practices by themselves.
+Positive evaluation.
+
+Troubleshooting:
+I was unable to find troubleshooting information on installation or configuration.
+Hopefully, it’s impossible to screw up the installation :)
+Negative evaluation.
+
+Understanding:
+Very easy to read and understand. The font is clear and the content is well written.
+Positive evaluation.
+
+2.
+Welcome to the Database Backup Bash Script documentation (DBBS):
+
+Assume I will store it on GitHub, though the main source of documentation will be the README file.
+I will keep it simple.
+
+About
+As briefly as possible, I will describe my product and its main features.
+
+Installation
+Step-by-step installation scenarios for supported operating systems.
+
+Configuration
+A list of variables and parameters — from the most important to the less critical ones.
+
+Usage
+A comprehensive guide on how to use my new tool.
+
+Examples
+This is the last, but most important part.
+Most users will come here looking for ready-to-use scenarios, so let’s give them plenty of those!
+
+
+
+ 
+
+

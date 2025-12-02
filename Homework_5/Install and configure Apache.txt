@@ -1,0 +1,24 @@
+Install and configure Apache
+
+INSTALATION
+apt update
+apt install apache2
+
+STARTUP
+systemctl enable apache2
+systemctl start apache2
+systemctl status apache2
+
+EXPLORE CONFIG
+Explore default page config, search for document root
+cat /etc/apache2/sites-enabled/000-default.conf
+It is /var/www/html
+
+DEPLOY HTML
+Put html file Hello World, that I found on internet, in /var/www/html
+Ensure it has Read permission:
+ls -l my_file.html
+-rw-r--r-- 1 root root 164 Nov  4 20:50 my_file.html
+
+TESTING
+Try to access test page from browser

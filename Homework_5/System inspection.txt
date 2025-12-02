@@ -1,0 +1,11 @@
+System inspection:
+
+Using
+journalctl -p err --since "2025-11-03 18:00:00" --until "2025-11-04 20:00:00"
+found a lot of errors like: 
+misc dxg: dxgk: dxgkio_query_adapter_info: Ioctl failed: -22
+
+Using 
+grep "failed" /var/log/syslog
+found previous error and one new
+ernel: WSL (2 - init-systemd(Ubuntu)) ERROR: WaitForBootProcess:3393: /sbin/init failed to start within 10000ms

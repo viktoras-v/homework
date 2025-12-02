@@ -1,0 +1,43 @@
+1.
+useradd -m student
+groupadd classroom
+usermod -aG classroom student
+touch /tmp/classwork.txt
+chgrp classroom /tmp/classwork.txt
+chmod 060 /tmp/classwork.txt
+
+2.
+ping  www.codeacademy.lt > /tmp/net_report.txt
+traceroute -n www.codeacademy.lt >> /tmp/net_report.txt
+
+3.
+netstat -tulpn
+My WSL has open port for localhost dns resolver.
+tcp        0      0 127.0.0.54:53           0.0.0.0:*               LISTEN      2916/systemd-resolv
+
+ifcondig
+My WSL has two network interfaces eth0 and lo
+IPV4 is assigned to eth0
+
+5.
+sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp
+sudo ufw enable
+sudo ufw status
+
+apt install openssh-server apache2
+systemctl start ssh apache2
+
+curl localhost:80
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+...
+
+curl localhost:22
+curl: (1) Received HTTP/0.9 when not allowed
+
+
+
+
+
+

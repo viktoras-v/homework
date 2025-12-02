@@ -1,0 +1,11 @@
+FROM php:8.2-cli AS builder
+WORKDIR /app
+COPY index.php .
+RUN --mount=type=secret,id=my_secret,target=/run/my_secret \
+    echo "The secret is: $(cat /run/my_secret)"
+
+
+FROM php:8.2-cli
+WORKDIR /app
+COPY --from=builder /app /app
+CMD ["php", "index.php"]

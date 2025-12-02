@@ -1,0 +1,24 @@
+docker volume create my_shared_volume
+
+docker run --rm -it --name container1 -v my_shared_volume:/data narbutas/busybox:latest sh
+docker run --rm -it --name container2 -v my_shared_volume:/data narbutas/busybox:latest sh
+
+2.
+# Create volume and network
+docker network create --driver bridge my_bridge
+docker volume create my_volume
+
+# Createfirst container
+docker run -d --name my_nginx --network=my_bridge nginx:latest
+
+# Create second container
+docker search curl
+docker run -it --name curl --network=my_bridge alpine/curl sh
+
+curl my_nginx
+
+
+
+
+
+

@@ -1,0 +1,9 @@
+1.
+create database test;
+use test;
+create table Students ( ID int, Name varchar(20), Age int );
+insert into Students ( ID, Name, Age) values (1, 'Jonas', 78);
+insert into Students ( ID, Name, Age) values (2, 'Antanas', 85);
+select * from Students;
+
+

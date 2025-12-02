@@ -1,0 +1,8 @@
+studentas:
+  name: Antanas
+  age: 72
+  grade: 10
+  subjects: 
+    - music
+    - art
+    - phisical education

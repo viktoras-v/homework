@@ -1,0 +1,20 @@
+#!/bin/bash
+
+read -p "Please enter one letter " LETTER
+
+case $LETTER in
+    [A-Za-z])
+        ;;
+        *)
+            echo "It is not a letter"; exit 1
+        ;;
+
+esac
+
+case $LETTER in
+    A|E|I|O|U|Y|a|e|i|o|u|y)
+            echo "Your letter $LETTER is vowel"
+        ;;
+        *)
+            echo "Your letter $LETTER is consonant"
+esac
