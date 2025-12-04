@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Variables
 count="1"
 rgroup="my_group"
 vm_name="az-test"
@@ -8,6 +9,7 @@ image="Ubuntu2404"
 size="Standard_D2s_v5"
 sshkey="~/.ssh/id_ed25519.pub"
 
+# Functions
 create_vm () {
     az vm create --resource-group $1 --name $2 --image $3 --ssh-key-values $4 --admin-username $5 --size $6
 }
@@ -16,13 +18,16 @@ delete_vm () {
     az vm delete -n $2 -g $1
 }
 
+# Menu
 echo "Wellcome to az-vm wrapper"
 read -p "Select action: l-login c - create, d - delete " action
 
+# Login action
 if [ "$action" == "l" ]; then
 az login --use-device-code
 fi
 
+# Create VM
 if [ "$action" == "c" ]; then
 echo "Hint: Press enter for default value."
 read -e -i "$count" -p "Enter vm count: " input
@@ -50,7 +55,7 @@ create_vm $rgroup $vm_name $image $sshkey $username $size
 done
 fi
 
-
+# Delete VM
 if [ "$action" == "d" ]; then
 echo "Hint: Press enter for default value."
 read -e -i "$vm_name" -p "Enter vm name: " input
@@ -61,6 +66,7 @@ echo "Deleting vm $name"
 delete_vm $rgroup $vm_name
 fi
 
+# Error input
 if [ "$action" != "c" ] && [ "$action" != "d" ] && [ "$action" != "l" ] ; then 
     echo "Wrond action. Bye!"; 
     exit 1;
