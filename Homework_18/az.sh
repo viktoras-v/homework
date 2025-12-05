@@ -1,20 +1,27 @@
 #!/bin/bash
 
 # Variables
-count="1"
-rgroup="my_group"
-vm_name="az-test"
-username="azureuser"
-image="Ubuntu2404"
-size="Standard_D2s_v5"
-sshkey="~/.ssh/id_ed25519.pub"
+count_default="1"
+rgroup_default="my_group"
+vm_name_default="az-test"
+username_default="azureuser"
+image_default="Ubuntu2404"
+size_default="Standard_D2s_v5"
+sshkey_default="~/.ssh/id_ed25519.pub"
 
 # Functions
 create_vm () {
+    echo "Provisioning new vm $2"
+    echo "az vm create --resource-group $1 --name $2 --image $3 --ssh-key-values $4 --admin-username $5 --size $6"
+    echo
     az vm create --resource-group $1 --name $2 --image $3 --ssh-key-values $4 --admin-username $5 --size $6
+    
 }
 
 delete_vm () {
+    echo "Deleteng vm $2"
+    echo "az vm delete --resource-group $1 --name $2"
+    echo
     az vm delete -n $2 -g $1
 }
 
@@ -30,27 +37,32 @@ fi
 # Create VM
 if [ "$action" == "c" ]; then
 echo "Hint: Press enter for default value."
-read -e -i "$count" -p "Enter vm count: " input
+read -e -i "$count_default" -p "Enter vm count: " input
 count=${input:-$count}
-for i in {1..$count}
+for ((i=1; i<=count; i++));
 do
-read -e -i "$rgroup" -p "Enter resource group: " input
-rgroup=${input:-$group}
-read -e -i "$vm_name" -p "Enter vm name: " input
-vm_name=${input:-$vm_name}
-read -e -i "$username" -p "Enter username: " input
-username=${input:-$username}
-read -e -i "$image" -p "Enter image: " input
-image=${input:-$image}
-read -e -i "$size" -p "Choose size: Standard_D2s_v3 or Standard_D4s_v3 or Standard_E2s_v3: defaut is " input
-size=${input:-$size}
-if [ "$size" != "Standard_D2s_v3" ] && [ "$size" != "Standard_D4s_v3" ] && [ "$size" != "Standard_E2s_v3" ] ; then
+unset input
+read -e -i "$rgroup_default" -p "Enter resource group: " input
+rgroup=${input:-$rgroup_default}
+unset input
+read -e -i "$vm_name_default" -p "Enter vm name: " input
+vm_name=${input:-$vm_name_default}
+unset input
+read -e -i "$username_default" -p "Enter username: " input
+username=${input:-$username_default}
+unset input
+read -e -i "$image_default" -p "Enter image: " input
+image=${input:-$image_default}
+unset input
+read -e -i "$size_default" -p "Choose size: Standard_D2s_v3 or Standard_D4s_v3 or Standard_E2s_v3: defaut is " input
+size=${input:-$size_default}
+if [ "$size" != "Standard_D2s_v5" ] && [ "$size" != "Standard_D4s_v3" ] && [ "$size" != "Standard_E2s_v3" ] ; then
     echo "Wrond size. Bye!"; 
     exit 1;
 fi
-read -e -i "$sshkey" -p "Enter path to ssh key: " input
-sshkey=${input:-$sshkey}
-echo "Provisioning new vm $name"
+unset input
+read -e -i "$sshkey_default" -p "Enter path to ssh key: " input
+sshkey=${input:-$sshkey_default}
 create_vm $rgroup $vm_name $image $sshkey $username $size
 done
 fi
@@ -58,11 +70,11 @@ fi
 # Delete VM
 if [ "$action" == "d" ]; then
 echo "Hint: Press enter for default value."
-read -e -i "$vm_name" -p "Enter vm name: " input
-vm_name=${input:-$vm_name}
-read -e -i "$rgroup" -p "Enter resource group: " input
-rgroup=${input:-$rgroup}
-echo "Deleting vm $name"
+read -e -i "$vm_name_default" -p "Enter vm name: " input
+vm_name=${input:-$vm_name_default}
+unset input
+read -e -i "$rgroup_default" -p "Enter resource group: " input
+rgroup=${input:-$rgroup_default}
 delete_vm $rgroup $vm_name
 fi
 
