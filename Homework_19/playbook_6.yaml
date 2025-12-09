@@ -1,0 +1,68 @@
+---
+- name: Install web server
+  remote_user: ansible
+  become: true
+  hosts: web
+
+  tasks:
+    - name: Install apache2
+      apt:
+        name: apache2
+        state: latest
+
+    - name: Run apache2
+      service:
+        name: apache2
+        state: started
+        enabled: true
+
+    - name: Create content
+      copy:
+        content: |
+          Hello from {{ ansible_host }}
+
+        dest: /var/www/html/index.html
+
+- name: Install balancer server
+  remote_user: ansible
+  become: true
+  hosts: balancer
+
+
+- name: Install Balancer
+  remote_user: ansible
+  become: true
+  hosts: balancer
+
+  tasks:
+    - name: Install HAproxy
+      apt:
+        name: haproxy
+        state: latest
+
+    - name: Configure balancer
+      file:
+        path: /etc/haproxy
+        state: directory
+        mode: '0664'
+
+    - name: Copy configuration
+      copy:
+          content: |
+            frontend http_front
+            bind *:81
+            stats uri /haproxy?stats
+            default_backend http_back
+
+            backend http_back
+            balance roundrobin
+            server azure-1 10.0.0.7:80 check
+            server azure-2 10.0.0.6:80 check
+          dest: /etc/haproxy/haproxy.cfg
+
+    - name: Restart Haproxy
+      service:
+        name: haproxy
+        state: restarted
+
+ 

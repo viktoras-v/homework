@@ -1,0 +1,23 @@
+---
+- name: Install netstat and apache command
+  hosts: azure-1
+  remote_user: ansible
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Install netstat
+      apt:
+        name: net-tools
+        state: latest
+
+    - name: Install apache
+      apt:
+        name: apache2
+        state: latest
+
+    - name: Run apache2
+      service:
+        name: apache2
+        state: started
+        enabled: true
