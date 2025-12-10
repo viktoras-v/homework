@@ -16,6 +16,6 @@ ansible-playbook -i inventory variable_utilization.yml -l prod
 ansible-playbook -i inventory configure_app.yml --ask-vault-pass -l dev
 password "test"
 
-4
+5
 # Error handling
 ansible-playbook -i inventory error_handle.yml
