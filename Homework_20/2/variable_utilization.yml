@@ -1,0 +1,14 @@
+---
+- name: Group vars example
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Show environment
+      debug:
+        msg: "Environment: {{ env }}"
+
+    - name: Show port
+      debug:
+        msg: "Port: {{ port }}"
+

@@ -1,0 +1,19 @@
+---
+- name: Configure application
+  hosts: all
+  become: yes
+  vars_files:
+    - vault.yml
+
+  tasks:
+    - name: Create dir
+      file:
+        path: /etc/myapp
+        state: directory
+
+    - name: Deploy config
+      template:
+        src: app.conf.j2
+        dest: /etc/myapp/app.conf
+
+

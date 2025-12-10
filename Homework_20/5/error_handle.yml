@@ -1,0 +1,29 @@
+---
+- name: Configure application
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: install nginx
+      block:
+        - name: Use dnf to install nginx
+          dnf:
+            name: nginx
+            state: latest
+          register: result
+      rescue:
+        - name: Use apt to install nginx
+          apt:
+            name: nginx
+            state: latest
+          register: result
+      always:
+        - name: Show result
+          debug:
+           var: result
+
+    - name: Install not existing package
+      package:
+        name: excell
+        state: present
+      ignore_errors: yes
