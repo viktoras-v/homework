@@ -23,4 +23,4 @@ jobs:
       - name: Login
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Push
-        run: docker push homework21/my-app
+        run: docker push homework21/${{ secrets.DOCKER_USERNAME }}/my-app:latest
