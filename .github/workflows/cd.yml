@@ -1,28 +1,23 @@
-name: Deploy
-
+name: Complex application CD
 on:
-  push:
-    branches: [ "main" ]
+  workflow_run:
+    workflows: ["ci"]
+    types:
+      - completed
 
 jobs:
   deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build static site
-        run: |
-          npm install
-          npm run build
+      - name: Build Docker image
+        run: docker build -t my-app .
 
-      - name: Deploy to GitHub Pages
-        uses: actions/upload-pages-artifact@v3
-
-      - name: Publish
-        uses: actions/deploy-pages@v4
+      - name: Login
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/homework_21
