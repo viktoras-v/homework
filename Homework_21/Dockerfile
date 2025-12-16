@@ -1,7 +1,7 @@
 
 # Builder
 
-FROM node:22-latest AS builder
+FROM node:22-alpine AS builder
 WORKDIR /app
 RUN apk update && apk add git nodejs npm
 RUN git clone https://github.com/heroku/node-js-sample.git
