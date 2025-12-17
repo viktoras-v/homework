@@ -17,5 +17,3 @@ COPY --from=builder /app/node-js-sample /app
 EXPOSE 5000
 CMD ["node", "index.js"]
 
-
-
