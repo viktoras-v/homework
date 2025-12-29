@@ -10,5 +10,9 @@
 
     - name: Show port
       debug:
+<<<<<<< HEAD
         msg: "Port: {{ app_port }}"
+=======
+        msg: "Port: {{ port }}"
+>>>>>>> b85f8a5dde1952e9709fddca1e7802494e376f6f
 
