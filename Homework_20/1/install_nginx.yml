@@ -1,0 +1,9 @@
+---
+- name: Install nginx
+  hosts: all
+  become: yes
+  environment:
+    ANSIBLE_HOST_KEY_CHECKING: "False"
+
+  roles:
+    - nginx
