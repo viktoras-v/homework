@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+    <h1>Submitted Users</h1>
+    <ul>
+        {% for name, email in users.items() %}
+            <li>{{ name }} — {{ email }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Go Back</a>
+</body>
+</html>
