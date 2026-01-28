@@ -1,8 +1,8 @@
 variable "repo_name" {
   type    = string
-  default = "ca-DevOpsUA6"
+  default = "homework"
 }
 variable "repo_user" {
   type    = string
-  default = "serbent"
+  default = "viktoras.v"
 }
