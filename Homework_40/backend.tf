@@ -2,7 +2,7 @@ terraform {
   backend "s3" {
     bucket = "VV-demo-bucket"
     key    = "terraform.tfstate"
-    region = "eu-central-1"
+    region = "us-east-1"
   }
 }
   
