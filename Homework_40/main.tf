@@ -1,8 +1,8 @@
 resource "aws_s3_bucket" "bucket" {
-  bucket = "VV-demo-bucket"
+  bucket = "vv-demo-bucket"
 }
 
 
 resource "aws_s3_bucket" "bucket2" {
-  bucket = "VV-demo-bucket2"
+  bucket = "vv-demo-bucket2"
 }
