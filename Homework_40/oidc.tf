@@ -19,22 +19,29 @@ resource "aws_iam_role" "github_actions_role" {
   name = "github-actions-role-${var.repo_name}"
 
   assume_role_policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect = "Allow",
-        Principal = {
-          Federated = "arn:aws:iam::413648731451:oidc-provider/token.actions.githubusercontent.com"
-        },
-        Action = "sts:AssumeRoleWithWebIdentity",
-        Condition = {
-          StringEquals = {"token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"}
-          StringLike = {"token.actions.githubusercontent.com:sub" = "repo:${var.repo_user}/${var.repo_name}:*"}
-}
-
-      }
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Federated": "arn:aws:iam::413648731451:oidc-provider/token.actions.githubusercontent.com"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "StringEquals": {
+                    "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+                },
+                "StringLike": {
+                    "token.actions.githubusercontent.com:sub": [
+                        "repo:viktoras-v/homework:*",
+                        "repo:viktoras-v/homework:*"
+                    ]
+                }
+            }
+        }
     ]
-  })
+}
+  )
 
   tags = {
     Name = "github-actions-role-${var.repo_name}"
