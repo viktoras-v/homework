@@ -4,5 +4,5 @@ variable "repo_name" {
 }
 variable "repo_user" {
   type    = string
-  default = "viktoras.v"
+  default = "viktoras-v"
 }
