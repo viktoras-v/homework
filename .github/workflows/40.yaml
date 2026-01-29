@@ -16,7 +16,7 @@ permissions:
   contents: read
 defaults:
   run:
-    working-directory: 40
+    working-directory: Homework_40
 
 jobs:
   AssumeRoleAndCallIdentity:
