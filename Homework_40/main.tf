@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "bucket1" {
   bucket = "vvv-demo-bucket1"
+  force_destroy = true
 }
 
 
