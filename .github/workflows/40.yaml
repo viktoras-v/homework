@@ -41,6 +41,9 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
+      - name: Import role
+        run: terraform import aws_iam_role.github_actions_role github-actions-role
+
       - name: Terraform Plan
         run: terraform plan
   
