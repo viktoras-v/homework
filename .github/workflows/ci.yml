@@ -3,7 +3,7 @@ name: Complex application CI
 on:
   push:
     branches:
-      - main
+#      - main
   workflow_dispatch:
 
 jobs:
