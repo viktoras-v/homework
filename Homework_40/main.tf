@@ -1,6 +1,4 @@
-provider "aws" {
-  region = "us-east-1"  # замени на нужный регион
-}
+
 
 resource "aws_instance" "example" {
   ami           = "ami-0b6c6ebed2801a5cb"  # замени на свой AMI
