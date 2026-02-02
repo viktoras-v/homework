@@ -7,8 +7,9 @@ __pycache__/
 *.so
 
 # Terraform
-.terraform/
+terraform/
 .terraform*
+terraform*
 
 # Distribution / packaging
 .Python
