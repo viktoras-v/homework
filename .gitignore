@@ -9,7 +9,8 @@ __pycache__/
 # Terraform
 terraform/
 .terraform*
-terraform*
+terraform.tstate
+terraform.tfstate.backup
 
 # Distribution / packaging
 .Python
