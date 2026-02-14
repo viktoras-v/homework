@@ -137,7 +137,7 @@ resource "aws_api_gateway_deployment" "cars_2_deployment" {
 }
 
 
-# 1. Создаем API Key
+# 1. Create API API Key
 resource "aws_api_gateway_api_key" "cars_2_key" {
   name        = "Cars_2_API_Key"
   description = "API key for Cars_2 API"
@@ -172,7 +172,7 @@ resource "aws_api_gateway_usage_plan" "cars_2_plan" {
 
 
 
-# 3. Assign Key to Usage Plan
+# Assign Key to Usage Plan
 resource "aws_api_gateway_usage_plan_key" "cars_2_key_attachment" {
   key_id        = aws_api_gateway_api_key.cars_2_key.id
   key_type      = "API_KEY"

@@ -1,0 +1,74 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: My Cars AWS SAM
+
+Globals:
+  Function:
+    Handler: index.lambda_handler
+    Runtime: python3.13
+    Environment:
+      Variables:
+        TABLE_NAME: !Ref Database
+
+Resources:
+  CarsRestApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: dev
+      Name: cars-api-sam-ua6
+      Auth: 
+        ApiKeyRequired: true
+        UsagePlan: 
+          CreateUsagePlan: PER_API
+          UsagePlanName: GatewayAuthorization
+
+  Database:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: "Cars-SAM-ua6"
+      AttributeDefinitions:
+        - AttributeName: "Cars_id"
+          AttributeType: "S"
+      KeySchema: 
+        - AttributeName: "Cars_id"
+          KeyType: HASH
+      BillingMode: "PAY_PER_REQUEST"
+
+  CreateCarFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: functions/createCar
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref Database
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            RestApiId: !Ref CarsRestApi
+            Path: /car
+            Method: POST
+
+  GetAllCarsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: functions/getAllCars
+      Handler: index.getAllCars
+      Runtime: python3.13
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref Database
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref Database
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            RestApiId: !Ref CarsRestApi
+            Path: /car
+            Method: GET
+
+Outputs:
+  RestApiUrl:
+    Value: !Sub "https://${CarsRestApi}.execute-api.${AWS::Region}.amazonaws.com/dev/"
