@@ -7,7 +7,7 @@ variable "environment" {
 locals {
   ingress_by_env = {
     dev = [
-      { port = 22, cidr = "10.0.0.0/16", desc = "SSH dev" }
+      { port = 22, cidr = "10.0.0.0/16", desc = "SSH dev" },
       { port = 80, cidr = "10.0.0.0/16", desc = "HTTP" }
     ]
     prod = [
