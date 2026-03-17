@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-app
+data:
+  ENVIRONMENT: "dev"
+  CUSTOM_TEXT: "Hell from K8s"
+  LOG_LEVEL: "debug"
+#   migration.properties: |
+#      source.folder=reports_dir
+#      target.folder=analytics_dir

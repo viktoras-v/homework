@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app
+        image: python:3.11-slim
+        ports:
+        - containerPort: 3000
+        command: ["python", "-c"]
+        args:
+          - |
+            import os, http.server, socketserver;
+            class Handler(http.server.SimpleHTTPRequestHandler):
+                def do_GET(self):
+                    self.send_response(200)
+                    self.end_headers()
+                    self.wfile.write(str(os.environ).encode());
+            socketserver.TCPServer(('', 3000), Handler).serve_forever()
+        envFrom:
+        - configMapRef:
+            name: my-app
