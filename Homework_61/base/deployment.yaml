@@ -30,3 +30,11 @@ spec:
         envFrom:
         - configMapRef:
             name: my-app
+        volumeMounts:
+          - mountPath: /data
+            name: my-storage
+      volumes:
+      - name: my-storage
+        persistentVolumeClaim:
+          claimName: my-disk
+        
