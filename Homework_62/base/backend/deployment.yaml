@@ -1,0 +1,45 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: bookapp-be
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bookapp-be
+  template:
+    metadata:
+      labels:
+        app: bookapp-be
+    spec:
+      containers:
+      - name: bookapp-be
+        image: serbentas/books-backend
+        ports:
+        - containerPort: 5000
+        env:
+          - name: DB_HOST
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: DB_HOST
+          - name: DB_PORT
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: DB_PORT
+          - name: DB_NAME
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: DB_NAME
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: DB_USER
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: DB_PASSWORD   

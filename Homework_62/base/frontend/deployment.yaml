@@ -1,0 +1,19 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: bookapp-fe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bookapp-fe
+  template:
+    metadata:
+      labels:
+        app: bookapp-fe
+    spec:
+      containers:
+      - name: bookapp-fe
+        image: serbentas/books-frontend
+        ports:
+        - containerPort: 80
