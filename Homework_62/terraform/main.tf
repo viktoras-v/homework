@@ -69,7 +69,8 @@ module "eks" {
 
   eks_managed_node_group_defaults = {
     ami_type = "AL2_x86_64"
-
+    # Можно добавить spot по умолчанию, если хотите
+    capacity_type = "SPOT"
   }
 
   eks_managed_node_groups = {
@@ -77,6 +78,7 @@ module "eks" {
       name = "node-group-1"
 
       instance_types = ["t3.small"]
+      capacity_type  = "SPOT"   # ключевое изменение для spot
 
       min_size     = 1
       max_size     = 3
@@ -87,6 +89,7 @@ module "eks" {
       name = "node-group-2"
 
       instance_types = ["t3.small"]
+      capacity_type  = "SPOT"  # ключевое изменение для spot
 
       min_size     = 1
       max_size     = 2
@@ -94,7 +97,6 @@ module "eks" {
     }
   }
 }
-
 
 # https://aws.amazon.com/blogs/containers/amazon-ebs-csi-driver-is-now-generally-available-in-amazon-eks-add-ons/ 
 data "aws_iam_policy" "ebs_csi_policy" {
