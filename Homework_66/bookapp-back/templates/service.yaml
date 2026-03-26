@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: backend
+spec:
+  selector:
+    app: bookapp-be
+  ports:
+  - port: 5000
+    targetPort: 5000
+    protocol: TCP
+  # type: LoadBalancer  # Change to LoadBalancer for Service. Lecture 62
+  type: ClusterIP # Change to ClusterIP for Ingress. Lecture 63

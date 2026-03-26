@@ -1,0 +1,8 @@
+primary:
+  initdb:
+    scriptsConfigMap: pg-init-scripts
+auth:
+  postgresPassword: blvGMjppxu
+  username: postgres
+  password: blvGMjppxu
+  database: booksdb

@@ -1,0 +1,19 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: bookapp-be
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bookapp-be
+  template:
+    metadata:
+      labels:
+        app: bookapp-be
+    spec:
+      containers:
+      - name: bookapp-be
+        image: viktorasv/books-backend:latest
+        ports:
+        - containerPort: 80
